@@ -1,0 +1,47 @@
+@media (max-width: 767px) {
+    .track-card {
+        width: auto;
+        max-width: 85%;
+        margin: auto auto 10px auto;
+        align-content: center;
+        background-color: #d6a5ff;
+    }
+
+    .track-avatar {
+        height: 60px;
+        width: 60px;
+        border-radius: 25%;
+        flex-shrink: 0;
+        object-fit: cover;
+    }
+
+    .track-content {
+        margin: auto;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .track-card {
+        max-width: 55%;
+        margin: auto auto 10px auto;
+        align-content: center;
+        background-color: #d6a5ff;
+    }
+
+    .track-avatar {
+        height: 60px;
+        width: 60px;
+        border-radius: 25%;
+        flex-shrink: 0;
+        object-fit: cover;
+    }
+
+    .track-content {
+        margin: auto;
+    }
+
+    .track-actions {
+        
+    }
+}

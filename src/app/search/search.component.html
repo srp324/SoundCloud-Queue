@@ -1,3 +1,40 @@
-<p>
-  search works!
-</p>
+<mat-form-field>
+  <input 
+    matInput 
+    placeholder="Simple Input" 
+    type="text"
+    #searchInput
+    name="searchInput">
+</mat-form-field>
+
+<!--
+<div class="col-3" *ngFor="let track of tracks"> 
+  <div class="card" style="margin:5px;">
+      <img class="card-img-top" src="{{track.artwork_url}}">
+      <div class="card-body">
+          <h5 class="card-title">{{track.title}}</h5>
+          <h5 class="card-title">{{track.user.username}}</h5>
+      </div>
+  </div>
+</div>
+-->
+
+<div class="col-3" *ngFor="let track of tracks"> 
+  <mat-card class="track-card">
+    <mat-card-header>
+        <div class="track-content">
+          <img mat-card-avatar class="track-avatar" src="{{track.artwork_url}}">
+          <mat-card-title>{{track.title}}</mat-card-title>
+          <mat-card-subtitle>{{track.user.username}}</mat-card-subtitle>
+        </div>
+        <mat-card-actions class="track-actions">
+            <button mat-raised-button color="warn" style="margin-bottom: 10px;">PLAY</button>
+            <br>
+            <button mat-raised-button color="primary">ADD</button>
+        </mat-card-actions>
+      </mat-card-header>
+  </mat-card>
+</div>
+
+
+
