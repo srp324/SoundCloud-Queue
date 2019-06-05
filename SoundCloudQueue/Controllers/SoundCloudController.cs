@@ -11,12 +11,13 @@ namespace SoundCloudQueue.Controllers
     [Produces("application/json")]
     public class SoundCloudController : Controller
     {
-        [Route("api/SoundCloud/getSong")]
+        [Route("api/SoundCloud/Search")]
         [HttpGet]
-        public async Task<JsonResult> getSong()
+        public async Task<JsonResult> Search(string query)
         {
             string result = string.Empty;
-            string url = "https://jsonplaceholder.typicode.com/todos/1";
+            //TODO: Handle client_id, limit, and offset parameters
+            string url = "https://api-v2.soundcloud.com/search?q=" + query + "&client_id=GYvpZm3S6Z8m7IRExO0VgEi10Y8AoT64&limit=20&offset=0";
 
             using (HttpClient client = new HttpClient())
             {
