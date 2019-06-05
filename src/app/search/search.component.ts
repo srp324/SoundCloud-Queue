@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchService } from '../services/search-service/search.service';
 
 @Component({
   selector: 'app-search',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(private searchService: SearchService) { }
 
   ngOnInit() {
+    this.searchService.searchTracks('Marshmello', 2, 0).then(tracks => {
+      console.log(tracks);
+    });
   }
 
 }
