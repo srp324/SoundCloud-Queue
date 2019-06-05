@@ -13,7 +13,7 @@ export class SearchService {
     });
   }
 
-  async searchTracks(query: string, limit: number, offset: number): Promise<any> {
+  searchTracks(query: string, limit: number, offset: number): Promise<any> {
     return SC.get('/tracks', {
       q: query, limit, offset
     });
