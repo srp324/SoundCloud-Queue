@@ -1,0 +1,40 @@
+<mat-toolbar id="mainToolbar" color="primary">
+  SoundCloud Queue
+  <span class="toolbar-spacer"></span>
+  
+  <button
+    *ngIf="isLoggedIn"
+    mat-mini-fab
+    [matMenuTriggerFor]="avatarDropDown"
+    class="toolbar-avatar"
+    color="primary"
+    [ngStyle]="{ 'background-image': 'url(' + user?.photoURL + ')'}">
+  </button>
+
+  <button
+    *ngIf="!isLoggedIn"
+    mat-raised-button
+    (click)="openDialog()"
+    color="accent"> LOG IN
+  </button>
+
+</mat-toolbar>
+
+<mat-menu #avatarDropDown="matMenu" class="logoutButton">
+  <!--
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ user?.displayName }}</mat-card-title>
+      <mat-card-subtitle>{{ user?.email }}</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+  -->
+  
+  <button
+    mat-menu-item
+    (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Sign out</span>
+  </button>
+  
+</mat-menu>

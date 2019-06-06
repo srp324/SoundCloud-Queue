@@ -1,0 +1,13 @@
+#mainToolbar .toolbar-spacer {
+    flex: 1 1 auto;
+ }
+ 
+ #mainToolbar .toolbar-icon {
+    margin: 0 4px;
+    cursor: pointer;
+ }
+ 
+ #mainToolbar .toolbar-avatar {
+    background-size: cover;
+    box-shadow: none;
+ }
