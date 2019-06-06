@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material-module';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MaterialModule } from './material-module';
-import { SearchComponent } from './search/search.component';
-import { QueueComponent } from './queue/queue.component';
+import { ToolbarComponent, LoginDialogComponent } from './core/toolbar/toolbar.component';
+import { SearchComponent } from './core/search/search.component';
+import { QueueComponent } from './core/queue/queue.component';
 
 import { SearchService } from './services/search-service/search.service';
 import { QueueService } from './services/queue-service/queue.service';
@@ -19,6 +22,8 @@ import { QueueService } from './services/queue-service/queue.service';
 @NgModule({
   declarations: [
     AppComponent,
+    ToolbarComponent,
+    LoginDialogComponent,
     SearchComponent,
     QueueComponent
   ],
@@ -29,9 +34,12 @@ import { QueueService } from './services/queue-service/queue.service';
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    NgxAuthFirebaseUIModule.forRoot(environment.firebase)
   ],
   providers: [SearchService, QueueService],
+  entryComponents: [LoginDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
