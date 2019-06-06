@@ -3,7 +3,22 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  soundcloud: {
+    client_id: 'GYvpZm3S6Z8m7IRExO0VgEi10Y8AoT64'
+  },
+
+  // Your web app's Firebase configuration
+  firebase: {
+    apiKey: 'AIzaSyABVekkzuuK_38qA4BAJkxRxOZTmZTeiwI',
+    authDomain: 'soundcloudqueue.firebaseapp.com',
+    databaseURL: 'https://soundcloudqueue.firebaseio.com',
+    projectId: 'soundcloudqueue',
+    storageBucket: 'soundcloudqueue.appspot.com',
+    messagingSenderId: '213615826367',
+    appId: '1:213615826367:web:d6c18f7816d0f68f'
+  }
 };
 
 /*
