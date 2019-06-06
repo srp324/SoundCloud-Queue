@@ -9,7 +9,8 @@ export class QueueService {
 
   constructor(public db: AngularFirestore) { }
 
-  getUser(userId: number): Observable<any> {
-    return this.db.collection('users', ref => ref.where('id', '==', userId)).snapshotChanges();
+  // TODO: Do I need this method here? or should I make a firebase service
+  getUser(userId: string): Observable<any> {
+    return this.db.collection('users', ref => ref.where('uid', '==', userId)).snapshotChanges();
   }
 }

@@ -11,7 +11,7 @@ export class QueueComponent implements OnInit {
   constructor(private queue: QueueService) { }
 
   ngOnInit() {
-    this.queue.getUser(0).subscribe(result => {
+    this.queue.getUser('uWTOiIobilRy5mUhtUweVWYsc4U2').subscribe(result => {
       if (result[0]) {
         console.log(result[0].payload.doc.data());
       }

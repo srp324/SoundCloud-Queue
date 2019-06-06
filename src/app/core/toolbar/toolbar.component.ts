@@ -15,6 +15,7 @@ export interface DialogData {
 export class ToolbarComponent implements OnInit {
 
   public isLoggedIn = false;
+  public user: firebase.User;
 
   constructor(public loginDialog: MatDialog) { }
 
@@ -22,14 +23,11 @@ export class ToolbarComponent implements OnInit {
   }
 
   openDialog() {
-    this.loginDialog.open(LoginDialogComponent, {
-      data: {
-        animal: 'panda'
-      }
-    })
+    this.loginDialog.open(LoginDialogComponent)
     .afterClosed()
     .subscribe(response => {
-      console.log(response);
+      this.isLoggedIn = true;
+      this.user = response;
     });
   }
 }
