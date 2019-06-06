@@ -18,4 +18,10 @@ export class SearchService {
       q: query, limit, offset
     });
   }
+
+  playTrack(trackId: string): void {
+    SC.stream('/tracks/' + trackId).then(player => {
+      player.play();
+    });
+  }
 }
