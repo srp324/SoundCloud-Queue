@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QueueService } from '../services/queue-service/queue.service';
 
 @Component({
   selector: 'app-queue',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QueueComponent implements OnInit {
 
-  constructor() { }
+  constructor(private queue: QueueService) { }
 
   ngOnInit() {
+    this.queue.getUser(0).subscribe(result => {
+      console.log(result[0].payload.doc.data());
+    });
   }
 
 }
