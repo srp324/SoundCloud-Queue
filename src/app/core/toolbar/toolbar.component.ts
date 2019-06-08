@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FirebaseService } from '../../services/firebase-service/firebase.service';
 
 export interface DialogData {
   animal: string;
@@ -14,19 +15,27 @@ export interface DialogData {
 })
 export class ToolbarComponent implements OnInit {
 
-  public isLoggedIn = false;
   public user: firebase.User;
 
-  constructor(public loginDialog: MatDialog) { }
+  constructor(public loginDialog: MatDialog, public firebase: FirebaseService) { }
 
   ngOnInit() {
+  }
+
+  isLoggedIn() {
+    const currentUser = this.firebase.getCurrentUser();
+    if (currentUser) {
+      this.user = currentUser;
+      return true;
+    }
+    else
+      return false;
   }
 
   openDialog() {
     this.loginDialog.open(LoginDialogComponent)
     .afterClosed()
     .subscribe(response => {
-      this.isLoggedIn = true;
       this.user = response;
     });
   }
