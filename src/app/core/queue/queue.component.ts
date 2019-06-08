@@ -11,11 +11,13 @@ export class QueueComponent implements OnInit {
   constructor(private firebase: FirebaseService) { }
 
   ngOnInit() {
+    /*
     this.firebase.getUser('uWTOiIobilRy5mUhtUweVWYsc4U2').subscribe(result => {
       if (result[0]) {
         console.log(result[0].payload.doc.data());
       }
     });
+    */
   }
 
 }

@@ -32,6 +32,15 @@ export class ToolbarComponent implements OnInit {
       return false;
   }
 
+  signOut() {
+    this.firebase.logout().then(() => {
+      this.user = null;
+    })
+    .catch(err => {
+      console.log('Error logging out');
+    });
+  }
+
   openDialog() {
     this.loginDialog.open(LoginDialogComponent)
     .afterClosed()
