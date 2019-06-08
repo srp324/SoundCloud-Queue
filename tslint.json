@@ -81,6 +81,10 @@
       "check-type",
       "check-typecast",
       "check-type-operator"
-    ]
+    ],
+    "one-line": [
+      false
+    ],
+    "curly": [true, "as-needed"]
   }
 }

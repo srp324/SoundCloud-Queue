@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { SearchService } from '../services/search-service/search.service';
+import { SearchService } from '../../services/search-service/search.service';
 import { fromEvent } from 'rxjs';
 import {
   debounceTime,
