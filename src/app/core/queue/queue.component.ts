@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QueueService } from '../../services/queue-service/queue.service';
+import { FirebaseService } from '../../services/firebase-service/firebase.service';
 
 @Component({
   selector: 'app-queue',
@@ -8,10 +8,10 @@ import { QueueService } from '../../services/queue-service/queue.service';
 })
 export class QueueComponent implements OnInit {
 
-  constructor(private queue: QueueService) { }
+  constructor(private firebase: FirebaseService) { }
 
   ngOnInit() {
-    this.queue.getUser('uWTOiIobilRy5mUhtUweVWYsc4U2').subscribe(result => {
+    this.firebase.getUser('uWTOiIobilRy5mUhtUweVWYsc4U2').subscribe(result => {
       if (result[0]) {
         console.log(result[0].payload.doc.data());
       }

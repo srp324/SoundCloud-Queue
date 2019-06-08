@@ -18,6 +18,7 @@ import { QueueComponent } from './core/queue/queue.component';
 
 import { SearchService } from './services/search-service/search.service';
 import { QueueService } from './services/queue-service/queue.service';
+import { FirebaseService } from './services/firebase-service/firebase.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,11 @@ import { QueueService } from './services/queue-service/queue.service';
     AngularFireStorageModule,
     NgxAuthFirebaseUIModule.forRoot(environment.firebase)
   ],
-  providers: [SearchService, QueueService],
+  providers: [
+    SearchService,
+    QueueService,
+    FirebaseService
+  ],
   entryComponents: [LoginDialogComponent],
   bootstrap: [AppComponent]
 })
