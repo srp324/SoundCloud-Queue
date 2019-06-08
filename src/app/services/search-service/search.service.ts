@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import SC from 'soundcloud';
 
 @Injectable({
@@ -8,7 +9,7 @@ export class SearchService {
 
   constructor() {
     SC.initialize({
-      client_id: 'GYvpZm3S6Z8m7IRExO0VgEi10Y8AoT64',
+      client_id: environment.soundcloud.client_id,
       redirect_uri: 'http://example.com/callback'
     });
   }
@@ -16,6 +17,12 @@ export class SearchService {
   searchTracks(query: string, limit: number, offset: number): Promise<any> {
     return SC.get('/tracks', {
       q: query, limit, offset
+    });
+  }
+
+  playTrack(trackId: string): void {
+    SC.stream('/tracks/' + trackId).then(player => {
+      player.play();
     });
   }
 }

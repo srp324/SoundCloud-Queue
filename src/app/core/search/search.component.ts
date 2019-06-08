@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { SearchService } from '../services/search-service/search.service';
+import { SearchService } from '../../services/search-service/search.service';
 import { fromEvent } from 'rxjs';
 import {
   debounceTime,
@@ -36,6 +36,7 @@ export class SearchComponent implements OnInit {
         // subscription for response
       ).subscribe((text: string) => {
         this.isSearching = true;
+        // TODO: Infinite scroll
         this.searchService.searchTracks(text, 20, 0).then(tracks => {
           this.isSearching = false;
           this.tracks = tracks;

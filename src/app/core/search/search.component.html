@@ -1,7 +1,7 @@
 <mat-form-field>
   <input 
     matInput 
-    placeholder="Simple Input" 
+    placeholder="Search Tracks" 
     type="text"
     #searchInput
     name="searchInput">
@@ -28,7 +28,7 @@
           <mat-card-subtitle>{{track.user.username}}</mat-card-subtitle>
         </div>
         <mat-card-actions class="track-actions">
-            <button mat-raised-button color="warn" style="margin-bottom: 10px;">PLAY</button>
+            <button type="button" mat-raised-button color="warn" style="margin-bottom: 10px;" (click)="searchService.playTrack(track.id)">PLAY</button>
             <br>
             <button mat-raised-button color="primary">ADD</button>
         </mat-card-actions>
