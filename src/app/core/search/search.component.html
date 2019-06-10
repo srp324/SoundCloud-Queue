@@ -21,18 +21,18 @@
 
 <div class="col-3" *ngFor="let track of tracks"> 
   <mat-card class="track-card">
-    <mat-card-header>
-        <div class="track-content">
-          <img mat-card-avatar class="track-avatar" src="{{track.artwork_url}}">
-          <mat-card-title>{{track.title}}</mat-card-title>
-          <mat-card-subtitle>{{track.user.username}}</mat-card-subtitle>
-        </div>
-        <mat-card-actions class="track-actions">
-            <button type="button" mat-raised-button color="warn" style="margin-bottom: 10px;" (click)="searchService.playTrack(track.id)">PLAY</button>
-            <br>
-            <button mat-raised-button color="primary">ADD</button>
-        </mat-card-actions>
+
+    <mat-card-content class="track-content">
+      <img mat-card-avatar class="track-avatar" src="{{track.artwork_url}}">
+      <mat-card-title class="track-font">{{track.title}}</mat-card-title>
+      <mat-card-subtitle>{{track.user.username}}</mat-card-subtitle>
+        
+      <mat-card-header class="track-actions">
+        <button type="button" mat-raised-button color="warn" style="margin-bottom: 10px;" (click)="searchService.playTrack(track.id)">PLAY</button>
+        <br>
+        <button mat-raised-button color="primary">ADD</button>
       </mat-card-header>
+    </mat-card-content>
   </mat-card>
 </div>
 
