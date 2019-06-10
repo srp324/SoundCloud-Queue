@@ -1,0 +1,24 @@
+/*.fill-height-or-more {
+    display: flex;
+    flex-direction: row;
+  }*/
+  
+  /* Split the screen in half */
+.split {
+    height: 90%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    overflow-x: auto;
+    margin-top: 10px;
+  }
+  
+  /* Control the left side */
+  .left {
+    left: 0;
+  }
+  
+  /* Control the right side */
+  .right {
+    right: 0;
+  }

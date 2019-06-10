@@ -3,7 +3,6 @@
         width: auto;
         max-width: 85%;
         margin: auto auto 10px auto;
-        align-content: center;
         background-color: #d6a5ff;
     }
 
@@ -15,8 +14,12 @@
         object-fit: cover;
     }
 
-    .track-content {
-        margin: auto;
+    .track-font {
+        font-size: 90%;
+    }
+
+    .track-actions {
+        display: block;
     }
 }
 
@@ -39,5 +42,9 @@
 
     .track-content {
         margin: auto;
+    }
+
+    .track-actions {
+        display: block;
     }
 }

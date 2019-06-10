@@ -32,6 +32,15 @@ export class ToolbarComponent implements OnInit {
       return false;
   }
 
+  signOut() {
+    this.firebase.logout().then(() => {
+      this.user = null;
+    })
+    .catch(err => {
+      console.log('Error logging out');
+    });
+  }
+
   openDialog() {
     this.loginDialog.open(LoginDialogComponent)
     .afterClosed()
@@ -43,6 +52,7 @@ export class ToolbarComponent implements OnInit {
 
 @Component({
   selector: 'app-login-dialog',
+  // TODO: Upgrade ngx-auth-firebaseui to 2.3.0 in order for messageOnAuthSuccess update (https://github.com/AnthonyNahas/ngx-auth-firebaseui/issues/163)
   template: '<ngx-auth-firebaseui [guestEnabled]="true" [providers]="[\'google\']" (onSuccess)="saveUser($event)"></ngx-auth-firebaseui>'
 })
 export class LoginDialogComponent {
