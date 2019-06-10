@@ -5,11 +5,12 @@
   
   /* Split the screen in half */
 .split {
-    height: 100%;
+    height: 90%;
     width: 50%;
     position: fixed;
     z-index: 1;
     overflow-x: hidden;
+    margin-top: 10px;
   }
   
   /* Control the left side */
