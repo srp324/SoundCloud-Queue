@@ -8,6 +8,19 @@ import { FirebaseService } from '../../services/firebase-service/firebase.servic
 })
 export class QueueComponent implements OnInit {
 
+  public tracks: any[] = [
+    {
+      name: "Alone",
+      artist: "Marshmello",
+      track_id: "12345"
+    },
+    {
+      name: "Happier",
+      artist: "Marshmello",
+      track_id: "123456"
+    },
+  ];
+
   constructor(private firebase: FirebaseService) { }
 
   ngOnInit() {
@@ -18,6 +31,14 @@ export class QueueComponent implements OnInit {
       }
     });
     */
+  }
+
+  removeTrack(id: string) {
+    console.log(id);
+  }
+
+  startQueue() {
+    console.log("Playing...");
   }
 
 }

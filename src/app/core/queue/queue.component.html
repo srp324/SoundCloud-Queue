@@ -1,3 +1,10 @@
-<p>
-  queue works!
-</p>
+<mat-list class="mat-list">
+    <h3 mat-subheader><mat-icon>queue_music</mat-icon>Tracks Queued</h3>
+    <button mat-raised-button color="primary" id="play" (click)="startQueue()">PLAY</button>
+    <mat-list-item *ngFor="let track of tracks; last as last">
+      <h4 mat-line>{{track.name}}</h4>
+      <p mat-line class="demo-2"> {{track.artist}} </p>
+      <button mat-raised-button color="warn" id="remove" (click)="removeTrack(track.track_id)">REMOVE</button>
+      <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+    </mat-list-item>
+ </mat-list>
