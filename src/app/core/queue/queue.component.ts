@@ -8,7 +8,7 @@ import { FirebaseService } from '../../services/firebase-service/firebase.servic
 })
 export class QueueComponent implements OnInit {
 
-  public tracks: any[] = [
+  public tracks: Array<any> = [
     {
       name: "Alone",
       artist: "Marshmello",
@@ -24,13 +24,13 @@ export class QueueComponent implements OnInit {
   constructor(private firebase: FirebaseService) { }
 
   ngOnInit() {
-    /*
-    this.firebase.getUser('uWTOiIobilRy5mUhtUweVWYsc4U2').subscribe(result => {
-      if (result[0]) {
-        console.log(result[0].payload.doc.data());
-      }
-    });
-    */
+  }
+
+  refreshQueue() {
+    const user = this.firebase.getCurrentUser();
+    if (user) {
+      this.firebase.getQueue(user.uid);
+    }
   }
 
   removeTrack(id: string) {
@@ -38,7 +38,8 @@ export class QueueComponent implements OnInit {
   }
 
   startQueue() {
-    console.log("Playing...");
+    console.log(this.firebase.queues);
+    //console.log("Playing...");
   }
 
 }
