@@ -34,6 +34,10 @@ export class FirebaseService {
     });
   }
 
+  clearQueue() {
+    this.queues = [];
+  }
+
   logout() {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser){

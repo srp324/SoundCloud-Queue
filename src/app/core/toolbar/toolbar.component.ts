@@ -16,6 +16,7 @@ export interface DialogData {
 export class ToolbarComponent implements OnInit {
 
   public user: firebase.User;
+  public loadedQueues = false;
 
   constructor(public loginDialog: MatDialog, public firebase: FirebaseService) { }
 
@@ -26,6 +27,10 @@ export class ToolbarComponent implements OnInit {
     const currentUser = this.firebase.getCurrentUser();
     if (currentUser) {
       this.user = currentUser;
+      if (!this.loadedQueues) {
+        this.firebase.getQueue(this.user.uid);
+        this.loadedQueues = true;
+      }
       return true;
     }
     else
@@ -35,6 +40,8 @@ export class ToolbarComponent implements OnInit {
   signOut() {
     this.firebase.logout().then(() => {
       this.user = null;
+      this.loadedQueues = false;
+      this.firebase.clearQueue();
     })
     .catch(err => {
       console.log('Error logging out');
