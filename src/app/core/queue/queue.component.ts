@@ -26,13 +26,6 @@ export class QueueComponent implements OnInit {
   ngOnInit() {
   }
 
-  refreshQueue() {
-    const user = this.firebase.getCurrentUser();
-    if (user) {
-      this.firebase.getQueue(user.uid);
-    }
-  }
-
   removeTrack(id: string) {
     console.log(id);
   }

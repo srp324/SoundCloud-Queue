@@ -11,7 +11,7 @@ export class FirebaseService {
 
   public user: firebase.User;
   public queuesCollectionRef = this.firestore.collection('queues');
-  public queues: any;
+  public queues: Array<any>;
 
   constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth) { }
 
@@ -25,12 +25,7 @@ export class FirebaseService {
 
   getQueue(userId: string) {
     this.firestore.collection('queues', ref => ref.where('user_id', '==', userId)).snapshotChanges().subscribe(data => {
-      this.queues = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        };
-      });
+      this.queues = data.map(e => (e.payload.doc.data() as any).track_ids);
     });
   }
 
