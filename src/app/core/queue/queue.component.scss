@@ -1,11 +1,46 @@
 .mat-list {
     width: 80%;
-}
-
-#remove {
-    padding: 0px;
+    position: relative;
 }
 
 #play {
     width: 95%;
+}
+
+@media (max-width: 767px) {
+    .track-avatar {
+        display: none;
+    }
+
+    #remove {
+        height: 50%;
+        min-width: 15%;
+        padding: 0px;
+    }
+
+    #remove:after {
+        content: "-";
+    }
+}
+
+@media (min-width: 768px) {
+    
+    #remove {
+        height: 50%;
+        min-width: 15%;
+        padding: 0px;
+    }
+
+    #remove:after {
+        content: "REMOVE";
+    }
+
+    .track-avatar {
+        position: absolute;
+        height: 60px;
+        width: 60px;
+        border-radius: 25%;
+        flex-shrink: 0;
+        object-fit: cover;
+    }
 }
