@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { SearchService } from '../search-service/search.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ export class FirebaseService {
 
   public user: firebase.User;
   public queuesCollectionRef = this.firestore.collection('queues');
-  public queues: Array<any>;
+  public queues: Array<any> = [];
 
-  constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth) { }
+  constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public sc: SearchService) { }
 
   getUser(userId: string): Observable<any> {
     return this.firestore.collection('users', ref => ref.where('uid', '==', userId)).snapshotChanges();
@@ -25,7 +26,10 @@ export class FirebaseService {
 
   getQueue(userId: string) {
     this.firestore.collection('queues', ref => ref.where('user_id', '==', userId)).snapshotChanges().subscribe(data => {
-      this.queues = data.map(e => (e.payload.doc.data() as any).track_ids);
+      const trackIds = data.map(e => (e.payload.doc.data() as any).track_ids);
+      for (const trackIdArr of trackIds)
+        for (const trackId of trackIdArr)
+          this.sc.getTrack(trackId).then(track => this.queues.push(track));
     });
   }
 

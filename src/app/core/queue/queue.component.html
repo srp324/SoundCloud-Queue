@@ -1,12 +1,11 @@
 <mat-list class="mat-list">
     <h3 mat-subheader><mat-icon>queue_music</mat-icon>Tracks Queued</h3>
     <button mat-raised-button color="primary" id="play" *ngIf="tracks.length > 0" (click)="startQueue()">PLAY</button>
-    <span *ngFor="let tracks of this.firebase.queues; last as last; let i = index">
-      <mat-list-item *ngFor="let track of tracks">
-        <h4 mat-line>{{track}}</h4>
-        <!--<p mat-line class="demo-2"> {{track.artist}} </p>-->
-        <button mat-raised-button color="warn" id="remove" (click)="removeTrack(track)">REMOVE</button>
-        <mat-divider [inset]="true"></mat-divider>
-      </mat-list-item>
-    </span>
+    <mat-list-item *ngFor="let track of this.firebase.queues; last as last;">
+      <img class="track-avatar" src="{{track.artwork_url}}">
+      <h4 mat-line>{{track.title}}</h4>
+      <p mat-line style="color: gray"> {{track.user.username}} </p>
+      <button mat-raised-button color="warn" id="remove" (click)="removeTrack(track)"></button>
+      <mat-divider [inset]="true"></mat-divider>
+    </mat-list-item>
  </mat-list>

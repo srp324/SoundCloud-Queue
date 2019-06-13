@@ -25,4 +25,8 @@ export class SearchService {
       player.play();
     });
   }
+
+  getTrack(trackId: string): any {
+    return SC.get('/tracks/' + trackId);
+  }
 }
