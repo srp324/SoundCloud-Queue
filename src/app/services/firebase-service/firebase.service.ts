@@ -27,9 +27,9 @@ export class FirebaseService {
   getQueue(userId: string) {
     this.firestore.collection('queues', ref => ref.where('user_id', '==', userId)).snapshotChanges().subscribe(data => {
       const trackIds = data.map(e => (e.payload.doc.data() as any).track_ids);
-      for (const trackIdArr of trackIds)
-        for (const trackId of trackIdArr)
-          this.sc.getTrack(trackId).then(track => this.queues.push(track));
+      (trackIds[0] as Array<any>).forEach((item, index) => {
+        this.sc.getTrack(item).then(track => this.queues[index] = track);
+      });
     });
   }
 
