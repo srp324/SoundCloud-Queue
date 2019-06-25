@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SearchService } from '../search-service/search.service';
+import { Track } from '../../models/Track';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { SearchService } from '../search-service/search.service';
 export class FirebaseService {
 
   public user: firebase.User;
-  public queuesCollectionRef = this.firestore.collection('queues');
+  public queueId = "";
   public queues: Array<any> = [];
 
   constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public sc: SearchService) { }
@@ -21,16 +22,34 @@ export class FirebaseService {
   }
 
   getCurrentUser() {
-    return firebase.auth().currentUser;
+      this.user = firebase.auth().currentUser;
+      return this.user;
   }
 
   getQueue(userId: string) {
     this.firestore.collection('queues', ref => ref.where('user_id', '==', userId)).snapshotChanges().subscribe(data => {
-      const trackIds = data.map(e => (e.payload.doc.data() as any).track_ids);
-      (trackIds[0] as Array<any>).forEach((item, index) => {
-        this.sc.getTrack(item).then(track => this.queues[index] = track);
+      const trackIds = data.map(e => {
+        const payload: any = e.payload.doc;
+        this.queueId = payload.id;
+        return payload.data().track_ids;
       });
+
+      if (trackIds.length > 0) {
+        (trackIds[0] as Array<any>).forEach((item, index) => {
+          this.sc.getTrack(item).then(track => this.queues[index] = track);
+        });
+      }
     });
+  }
+
+  addToQueue(trackId: string) {
+    // TODO: Handle when not logged in
+    const trackIds = [];
+    this.queues.map(value => {
+      trackIds.push(value.id);
+    });
+    trackIds.push(trackId);
+    this.firestore.doc('queues/' + this.queueId).update({track_ids: trackIds, user_id: this.user.uid}); // TODO: Switch firebase track_ids to complete track info (this.queues)
   }
 
   clearQueue() {

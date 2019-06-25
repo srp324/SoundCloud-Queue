@@ -23,14 +23,14 @@
   <mat-card class="track-card">
 
     <mat-card-content class="track-content">
-      <img mat-card-avatar class="track-avatar" src="{{track.artwork_url}}">
+      <img mat-card-avatar class="track-avatar" *ngIf="track?.artwork_url" src="{{track.artwork_url}}">
       <mat-card-title class="track-font">{{track.title}}</mat-card-title>
       <mat-card-subtitle>{{track.user.username}}</mat-card-subtitle>
         
       <mat-card-header class="track-actions">
-        <button type="button" mat-raised-button color="warn" style="margin-bottom: 10px;" (click)="searchService.playTrack(track.id)">PLAY</button>
+        <button type="button" mat-raised-button color="warn" style="margin-bottom: 10px;" (click)="playTrack(track.id)">PLAY</button>
         <br>
-        <button mat-raised-button color="primary">ADD</button>
+        <button mat-raised-button color="primary" (click)="addToQueue(track.id)">ADD</button>
       </mat-card-header>
       
     </mat-card-content>

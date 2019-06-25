@@ -7,6 +7,7 @@ import {
   distinctUntilChanged,
   filter
 } from 'rxjs/operators';
+import { FirebaseService } from '../../services/firebase-service/firebase.service';
 
 @Component({
   selector: 'app-search',
@@ -19,7 +20,15 @@ export class SearchComponent implements OnInit {
   public tracks: any[] = [];
   isSearching: boolean;
 
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService, private fbService: FirebaseService) { }
+
+  playTrack(trackId: string) {
+    this.searchService.playTrack(trackId);
+  }
+
+  addToQueue(trackId: string) {
+    this.fbService.addToQueue(trackId);
+  }
 
   ngOnInit() {
     fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
