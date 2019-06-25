@@ -17,15 +17,6 @@ export class FirebaseService {
 
   constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public sc: SearchService) { }
 
-  getUser(userId: string): Observable<any> {
-    return this.firestore.collection('users', ref => ref.where('uid', '==', userId)).snapshotChanges();
-  }
-
-  getCurrentUser() {
-      this.user = firebase.auth().currentUser;
-      return this.user;
-  }
-
   getQueue(userId: string) {
     this.firestore.collection('queues', ref => ref.where('user_id', '==', userId)).snapshotChanges().subscribe(data => {
       const trackIds = data.map(e => {
@@ -64,6 +55,15 @@ export class FirebaseService {
 
   clearQueue() {
     this.queues = [];
+  }
+
+  getUser(userId: string): Observable<any> {
+    return this.firestore.collection('users', ref => ref.where('uid', '==', userId)).snapshotChanges();
+  }
+  
+  getCurrentUser() {
+      this.user = firebase.auth().currentUser;
+      return this.user;
   }
 
   logout() {
