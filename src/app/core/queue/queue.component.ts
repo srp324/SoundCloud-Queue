@@ -26,8 +26,8 @@ export class QueueComponent implements OnInit {
   ngOnInit() {
   }
 
-  removeTrack(id: string) {
-    console.log(id);
+  removeTrack(trackId: string) {
+    this.firebase.removeFromQueue(trackId);
   }
 
   startQueue() {

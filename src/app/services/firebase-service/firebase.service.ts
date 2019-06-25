@@ -30,7 +30,7 @@ export class FirebaseService {
     this.firestore.collection('queues', ref => ref.where('user_id', '==', userId)).snapshotChanges().subscribe(data => {
       const trackIds = data.map(e => {
         const payload: any = e.payload.doc;
-        this.queueId = payload.id;
+        this.queueId = payload.id;                                                                            // TODO: Remove when logged out
         return payload.data().track_ids;
       });
 
@@ -50,6 +50,16 @@ export class FirebaseService {
     });
     trackIds.push(trackId);
     this.firestore.doc('queues/' + this.queueId).update({track_ids: trackIds, user_id: this.user.uid}); // TODO: Switch firebase track_ids to complete track info (this.queues)
+  }
+
+  removeFromQueue(trackId: string) {
+    const trackIds = [];
+    this.queues.map(value => {
+      if (value !== trackId)
+        trackIds.push(value.id);
+    });
+    this.queues.splice(this.queues.indexOf(trackId), 1);
+    this.firestore.doc('queues/' + this.queueId).update({track_ids: trackIds, user_id: this.user.uid});
   }
 
   clearQueue() {
