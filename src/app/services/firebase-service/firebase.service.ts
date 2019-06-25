@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SearchService } from '../search-service/search.service';
+import { Track } from '../../models/Track';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,6 @@ import { SearchService } from '../search-service/search.service';
 export class FirebaseService {
 
   public user: firebase.User;
-  public queuesCollectionRef = this.firestore.collection('queues');
   public queues: Array<any> = [];
 
   constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public sc: SearchService) { }
@@ -21,7 +21,8 @@ export class FirebaseService {
   }
 
   getCurrentUser() {
-    return firebase.auth().currentUser;
+      this.user = firebase.auth().currentUser;
+      return this.user;
   }
 
   getQueue(userId: string) {
