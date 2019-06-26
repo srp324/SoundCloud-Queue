@@ -27,7 +27,13 @@ export class SearchComponent implements OnInit {
   }
 
   addToQueue(trackId: string) {
-    this.fbService.addToQueue(trackId);
+    if (!this.fbService.user) {
+      this.searchService.getTrack(trackId).then(track => {
+        this.fbService.queues.push(track);
+      });
+    }
+    else
+      this.fbService.addToQueue(trackId);
   }
 
   ngOnInit() {
