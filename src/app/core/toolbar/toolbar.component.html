@@ -3,8 +3,9 @@
   <span class="toolbar-spacer"></span>
   
   <button
-    *ngIf="isLoggedIn()"
+    *ngIf="user"
     mat-mini-fab
+    #menuTrigger="matMenuTrigger"
     [matMenuTriggerFor]="avatarDropDown"
     class="toolbar-avatar"
     color="primary"
@@ -12,7 +13,7 @@
   </button>
 
   <button
-    *ngIf="!isLoggedIn()"
+    *ngIf="!user"
     mat-raised-button
     (click)="openDialog()"
     color="accent"> LOG IN
