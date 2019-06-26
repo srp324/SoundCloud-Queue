@@ -17,20 +17,11 @@ export class FirebaseService {
 
   constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public sc: SearchService) { }
 
-  getUser(userId: string): Observable<any> {
-    return this.firestore.collection('users', ref => ref.where('uid', '==', userId)).snapshotChanges();
-  }
-
-  getCurrentUser() {
-      this.user = firebase.auth().currentUser;
-      return this.user;
-  }
-
   getQueue(userId: string) {
     this.firestore.collection('queues', ref => ref.where('user_id', '==', userId)).snapshotChanges().subscribe(data => {
       const trackIds = data.map(e => {
         const payload: any = e.payload.doc;
-        this.queueId = payload.id;
+        this.queueId = payload.id;                                                                            // TODO: Remove when logged out
         return payload.data().track_ids;
       });
 
@@ -52,10 +43,20 @@ export class FirebaseService {
     this.firestore.doc('queues/' + this.queueId).update({track_ids: trackIds, user_id: this.user.uid}); // TODO: Switch firebase track_ids to complete track info (this.queues)
   }
 
+  removeFromQueue(trackId: string) {
+    const trackIds = [];
+    this.queues.map(value => {
+      if (value !== trackId)
+        trackIds.push(value.id);
+    });
+    this.queues.splice(this.queues.indexOf(trackId), 1);
+    this.firestore.doc('queues/' + this.queueId).update({track_ids: trackIds, user_id: this.user.uid});
+  }
+
   clearQueue() {
     this.queues = [];
   }
-
+  
   logout() {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser){

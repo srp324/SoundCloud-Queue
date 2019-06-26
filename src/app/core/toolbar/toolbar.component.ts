@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FirebaseService } from '../../services/firebase-service/firebase.service';
+import * as firebase from 'firebase/app';
 
 export interface DialogData {
   animal: string;
@@ -16,32 +17,28 @@ export interface DialogData {
 export class ToolbarComponent implements OnInit {
 
   public user: firebase.User;
-  public loadedQueues = false;
 
-  constructor(public loginDialog: MatDialog, public firebase: FirebaseService) { }
-
-  ngOnInit() {
+  constructor(public loginDialog: MatDialog, public fbService: FirebaseService) {
+    window.onload = () => {
+      this.isLoggedIn();
+    };
   }
 
+  ngOnInit() {}
+
   isLoggedIn() {
-    const currentUser = this.firebase.getCurrentUser();
-    if (currentUser) {
-      this.user = currentUser;
-      if (!this.loadedQueues) {
-        this.firebase.getQueue(this.user.uid);
-        this.loadedQueues = true;
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.user = user;
+        this.fbService.getQueue(this.user.uid);
       }
-      return true;
-    }
-    else
-      return false;
+    });
   }
 
   signOut() {
-    this.firebase.logout().then(() => {
+    this.fbService.logout().then(() => {
       this.user = null;
-      this.loadedQueues = false;
-      this.firebase.clearQueue();
+      this.fbService.clearQueue();
     })
     .catch(err => {
       console.log('Error logging out');
