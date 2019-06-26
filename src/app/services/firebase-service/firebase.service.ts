@@ -56,16 +56,7 @@ export class FirebaseService {
   clearQueue() {
     this.queues = [];
   }
-
-  getUser(userId: string): Observable<any> {
-    return this.firestore.collection('users', ref => ref.where('uid', '==', userId)).snapshotChanges();
-  }
   
-  getCurrentUser() {
-      this.user = firebase.auth().currentUser;
-      return this.user;
-  }
-
   logout() {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser){
