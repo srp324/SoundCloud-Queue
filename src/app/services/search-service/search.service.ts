@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import SC from 'soundcloud';
+import 'soundcloud-widget';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import SC from 'soundcloud';
 export class SearchService {
 
   constructor() {
+    console.log(SC.Widget.Events);
     SC.initialize({
       client_id: environment.soundcloud.client_id,
       redirect_uri: 'http://example.com/callback'
