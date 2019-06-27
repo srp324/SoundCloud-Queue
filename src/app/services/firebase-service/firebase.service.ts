@@ -44,6 +44,7 @@ export class FirebaseService {
   }
 
   removeFromQueue(trackId: string) {
+    // TODO: Handle when not logged in
     const trackIds = [];
     this.queues.map(value => {
       if (value !== trackId)
@@ -53,14 +54,19 @@ export class FirebaseService {
     this.firestore.doc('queues/' + this.queueId).update({track_ids: trackIds, user_id: this.user.uid});
   }
 
+  setQueue(newQueue: Array<any>) {
+    this.queues = newQueue;
+  }
+
   clearQueue() {
     this.queues = [];
   }
-  
+
   logout() {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser){
         this.afAuth.auth.signOut();
+        this.user = null;
         resolve();
       }
       else

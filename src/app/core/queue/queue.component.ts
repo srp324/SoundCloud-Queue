@@ -8,30 +8,28 @@ import { FirebaseService } from '../../services/firebase-service/firebase.servic
 })
 export class QueueComponent implements OnInit {
 
-  public tracks: Array<any> = [
-    {
-      name: "Alone",
-      artist: "Marshmello",
-      track_id: "12345"
-    },
-    {
-      name: "Happier",
-      artist: "Marshmello",
-      track_id: "123456"
-    },
-  ];
-
-  constructor(private firebase: FirebaseService) { }
+  constructor(private fbService: FirebaseService) { }
 
   ngOnInit() {
   }
 
   removeTrack(trackId: string) {
-    this.firebase.removeFromQueue(trackId);
+    if (!this.fbService.user) {
+      console.log("no user");
+      const queues = this.fbService.queues;
+      const trackIds = [];
+      queues.map(value => {
+        if (value !== trackId)
+          trackIds.push(value);
+      });
+      this.fbService.setQueue(trackIds);
+    }
+    else
+      this.fbService.removeFromQueue(trackId);
   }
 
   startQueue() {
-    console.log(this.firebase.queues);
+    console.log(this.fbService.queues);
     //console.log("Playing...");
   }
 
