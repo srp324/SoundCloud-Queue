@@ -54,6 +54,10 @@ export class FirebaseService {
     this.firestore.doc('queues/' + this.queueId).update({track_ids: trackIds, user_id: this.user.uid});
   }
 
+  setQueue(newQueue: Array<any>) {
+    this.queues = newQueue;
+  }
+
   clearQueue() {
     this.queues = [];
   }
