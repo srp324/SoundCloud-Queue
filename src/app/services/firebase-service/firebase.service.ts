@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { SearchService } from '../search-service/search.service';
+import { SoundCloudService } from '../soundcloud-service/soundcloud.service';
 import { Track } from '../../models/Track';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class FirebaseService {
   public queueId = "";
   public queues: Array<any> = [];
 
-  constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public sc: SearchService) { }
+  constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public scService: SoundCloudService) { }
 
   getQueue(userId: string) {
     this.firestore.collection('queues', ref => ref.where('user_id', '==', userId)).snapshotChanges().subscribe(data => {
@@ -27,7 +27,7 @@ export class FirebaseService {
 
       if (trackIds.length > 0) {
         (trackIds[0] as Array<any>).forEach((item, index) => {
-          this.sc.getTrack(item).then(track => this.queues[index] = track);
+          this.scService.getTrack(item).then(track => this.queues[index] = track);
         });
       }
     });

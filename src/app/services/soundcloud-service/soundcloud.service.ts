@@ -6,7 +6,7 @@ import 'soundcloud-widget';
 @Injectable({
   providedIn: 'root'
 })
-export class SearchService {
+export class SoundCloudService {
 
   constructor() {
     console.log(SC.Widget.Events);
