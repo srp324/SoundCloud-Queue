@@ -34,13 +34,4 @@
     #remove:after {
         content: "REMOVE";
     }
-
-    .track-avatar {
-        position: absolute;
-        height: 60px;
-        width: 60px;
-        border-radius: 25%;
-        flex-shrink: 0;
-        object-fit: cover;
-    }
 }
