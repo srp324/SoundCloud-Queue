@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { SearchService } from '../../services/search-service/search.service';
+import { SoundCloudService } from '../../services/soundcloud-service/soundcloud.service';
 import { fromEvent } from 'rxjs';
 import {
   debounceTime,
@@ -20,15 +20,15 @@ export class SearchComponent implements OnInit {
   public tracks: any[] = [];
   isSearching: boolean;
 
-  constructor(private searchService: SearchService, private fbService: FirebaseService) { }
+  constructor(private scService: SoundCloudService, private fbService: FirebaseService) { }
 
   playTrack(trackId: string) {
-    this.searchService.playTrack(trackId);
+    this.scService.playTrack(trackId);
   }
 
   addToQueue(trackId: string) {
     if (!this.fbService.user) {
-      this.searchService.getTrack(trackId).then(track => {
+      this.scService.getTrack(trackId).then(track => {
         this.fbService.queues.push(track);
       });
     }
@@ -52,7 +52,7 @@ export class SearchComponent implements OnInit {
       ).subscribe((text: string) => {
         this.isSearching = true;
         // TODO: Infinite scroll
-        this.searchService.searchTracks(text, 20, 0).then(tracks => {
+        this.scService.searchTracks(text, 20, 0).then(tracks => {
           this.isSearching = false;
           this.tracks = tracks;
           console.log(this.tracks);

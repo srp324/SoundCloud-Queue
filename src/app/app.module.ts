@@ -16,7 +16,7 @@ import { ToolbarComponent, LoginDialogComponent } from './core/toolbar/toolbar.c
 import { SearchComponent } from './core/search/search.component';
 import { QueueComponent } from './core/queue/queue.component';
 
-import { SearchService } from './services/search-service/search.service';
+import { SoundCloudService } from './services/soundcloud-service/soundcloud.service';
 import { QueueService } from './services/queue-service/queue.service';
 import { FirebaseService } from './services/firebase-service/firebase.service';
 
@@ -40,7 +40,7 @@ import { FirebaseService } from './services/firebase-service/firebase.service';
     NgxAuthFirebaseUIModule.forRoot(environment.firebase)
   ],
   providers: [
-    SearchService,
+    SoundCloudService,
     QueueService,
     FirebaseService
   ],

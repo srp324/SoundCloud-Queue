@@ -1,11 +1,14 @@
 <mat-list class="mat-list">
     <h3 mat-subheader><mat-icon>queue_music</mat-icon>Tracks Queued</h3>
     <button mat-raised-button color="primary" id="play" (click)="startQueue()">PLAY</button>
+    <iframe class="player" width="95%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/293&amp;enable_api=true&amp;show_comments=false">
+    </iframe>
     <mat-list-item *ngFor="let track of this.fbService.queues; last as last;">
-      <img class="track-avatar" src="{{track?.artwork_url}}">
+      <img mat-list-avatar class="track-avatar" *ngIf="track?.artwork_url" src="{{track?.artwork_url}}">
       <h4 mat-line>{{track?.title}}</h4>
       <p mat-line style="color: gray"> {{track?.user.username}} </p>
       <button mat-raised-button color="warn" id="remove" (click)="removeTrack(track)"></button>
-      <mat-divider [inset]="true"></mat-divider>
+      <mat-divider></mat-divider>
     </mat-list-item>
  </mat-list>
