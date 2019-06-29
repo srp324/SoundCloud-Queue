@@ -7,6 +7,11 @@
     width: 95%;
 }
 
+iframe {
+    opacity: 0;
+    visibility: hidden;
+  }
+
 @media (max-width: 767px) {
     .track-avatar {
         display: none;

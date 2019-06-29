@@ -8,11 +8,13 @@ import 'soundcloud-widget';
 })
 export class SoundCloudService {
 
+  private player: any;
+  private songPlaying = false;
+
   constructor() {
     console.log(SC.Widget.Events);
     SC.initialize({
-      client_id: environment.soundcloud.client_id,
-      redirect_uri: 'http://example.com/callback'
+      client_id: environment.soundcloud.client_id
     });
   }
 
@@ -30,5 +32,19 @@ export class SoundCloudService {
 
   getTrack(trackId: string): any {
     return SC.get('/tracks/' + trackId);
+  }
+
+  playQueue(queue: any) {
+    this.player.play();
+  }
+
+  setPlayer(player: HTMLIFrameElement) {
+    this.player = SC.Widget(player);
+    this.player.bind(SC.Widget.Events.PLAY, () => {
+      if (!this.songPlaying) {
+        console.log("Playing...");
+        this.songPlaying = true;
+      }
+    });
   }
 }
