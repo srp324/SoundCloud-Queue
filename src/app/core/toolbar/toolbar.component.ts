@@ -30,6 +30,7 @@ export class ToolbarComponent implements OnInit {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.user = user;
+        this.fbService.user = user;
         this.fbService.getQueue(this.user.uid);
       }
     });
