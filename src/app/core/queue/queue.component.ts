@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase-service/firebase.service';
 import { SoundCloudService } from '../../services/soundcloud-service/soundcloud.service';
-import * as $ from 'jquery';
+import * as $ from 'jquery'; // TODO: Remove
 
 @Component({
   selector: 'app-queue',
@@ -12,9 +12,7 @@ export class QueueComponent implements OnInit {
 
   constructor(private fbService: FirebaseService, private scService: SoundCloudService) { }
 
-  ngOnInit() {
-    this.scService.setPlayer(document.querySelector('iframe'));
-  }
+  ngOnInit() {}
 
   removeTrack(trackId: string) {
     if (!this.fbService.user) {
@@ -32,9 +30,6 @@ export class QueueComponent implements OnInit {
   }
 
   startQueue() {
-    $('.player').css("visibility", "visible");
-    $('.player').css({ opacity: 1 });
     this.scService.playQueue(this.fbService.queues);
   }
-
 }

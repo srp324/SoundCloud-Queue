@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import SC from 'soundcloud';
-import 'soundcloud-widget';
+import 'soundcloud-widget'; // TODO: Remove
 
 @Injectable({
   providedIn: 'root'
@@ -34,17 +34,22 @@ export class SoundCloudService {
     return SC.get('/tracks/' + trackId);
   }
 
-  playQueue(queue: any) {
-    this.player.play();
-  }
+  playQueue(queue: Array<any>) { //TODO: Remove from firebase queue
+    //console.log(queue);
 
-  setPlayer(player: HTMLIFrameElement) {
-    this.player = SC.Widget(player);
-    this.player.bind(SC.Widget.Events.PLAY, () => {
-      if (!this.songPlaying) {
-        console.log("Playing...");
-        this.songPlaying = true;
-      }
-    });
+    if (queue[0]) {
+      const trackId = queue[0].id;
+      SC.stream('/tracks/' + trackId).then(player => {
+        player.play();
+        player.on('finish', () => {
+          // player.kill();
+          console.log("finished");
+          if (queue[queue.indexOf(trackId) + 1]) {
+            queue.shift();
+            this.playQueue(queue);
+          }
+        });
+      });
+    }
   }
 }
